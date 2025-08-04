@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Inconsolata";
+  src: url(/assets/fonts/Inconsolata-VariableFont_wdth,wght.woff2)
+    format("woff2");
+  font-style: 400 800;
+  font-display: swap;
+}
+
+@theme {
+  --font-Inconsolata: "Inconsolata", system-ui, sans-serif;
+  --color-Neutral-0: hsl(0, 0%, 100%);
+  --color-Neutral-300: hsl(252, 6%, 83%);
+  --color-Neutral-500: hsl(245, 15%, 58%);
+  --color-Neutral-700: hsl(245, 19%, 35%);
+  --color-Neutral-900: hsl(248, 70%, 10%);
+
+  --color-Orange-500: hsl(7, 88%, 67%);
+  --color-Orange-700: hsl(7, 71%, 60%);
+}
+
+html, body{
+  @apply h-full;
+}
+
+body {
+  @apply font-Inconsolata bg-[url('/assets/images/background-mobile.png')] bg-no-repeat bg-center bg-cover;
+}
+main {
+    @apply bg-[url('/assets/images/pattern-lines.svg')] bg-no-repeat bg-cover;
+}
+
+.input-info{
+  @apply border border-Neutral-300 rounded-md p-2 bg-Neutral-0/10 placeholder-Neutral-0/50 focus-visible:outline-none;
+}
