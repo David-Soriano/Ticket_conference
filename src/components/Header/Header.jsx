@@ -1,17 +1,17 @@
 export function Header() {
     return (
-        <header className="flex justify-between items-center">
+        <header className="flex justify-between items-center w-full sm:h-22 sm:mb-5">
             <div>
-                <picture className="">
-                    <img className="relative -top-6 -left-4 w-26" src="/public/assets/images/pattern-circle.svg" alt="pattern-circle" />
+                <picture>
+                    <img className="relative -top-6 -left-4 w-26 sm:w-40 sm:left-8 sm:-top-15 sm:absolute" src="/public/assets/images/pattern-circle.svg" alt="pattern-circle" />
                 </picture>
             </div>
             <div><picture>
-                <img className="w-40" src="../../assets/images/logo-full.svg" alt="Logo_coding_form" />
+                <img className="w-40 sm:w-44" src="../../assets/images/logo-full.svg" alt="Logo_coding_form" />
             </picture></div>
             <div>
                 <picture>
-                    <img className="w-24" src="/public/assets/images/pattern-squiggly-line-top.svg" alt="pattern-circle" />
+                    <img className="w-24 sm:absolute sm:right-0 sm:top-18 sm:w-[30%]" src="/public/assets/images/pattern-squiggly-line-top.svg" alt="pattern-circle" />
                 </picture>
             </div>
         </header>
