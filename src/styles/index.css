@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "./BigScreens.css";
+@import "./SmallScreens.css";
 
 @font-face {
   font-family: "Inconsolata";
@@ -37,4 +39,3 @@ main {
 .input-info {
   @apply border rounded-lg p-2 bg-Neutral-0/10 hover:bg-Neutral-0/25 placeholder-Neutral-0/50 focus-visible:outline-none w-full;
 }
-

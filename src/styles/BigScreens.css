@@ -1,0 +1,57 @@
+@media (min-width: 1800px) {
+  
+}
+@media (min-width: 1800px) {
+  @layer utilities {
+    .section-ticket {
+      @apply p-7;
+    }
+
+    .container_cod-conf {
+      @apply 2xl:gap-6;
+    }
+
+    .cod-conf--img {
+      @apply w-18;
+    }
+
+    .cod-conf--text {
+      @apply 2xl:gap-7;
+    }
+
+    .cod-conf--text h3 {
+      @apply text-7xl leading-11;
+    }
+
+    .cod-conf--text p {
+      @apply 2xl:text-4xl;
+    }
+
+    .avatar {
+      @apply size-34;
+    }
+
+    .txt-invitado {
+      @apply text-6xl leading-10;
+    }
+
+    .container-github {
+      @apply gap-2;
+    }
+
+    .container-github img {
+      @apply w-8;
+    }
+
+    .container-github p {
+      @apply text-2xl;
+    }
+
+    .text-id {
+      @apply text-3xl;
+    }
+    .ticket-col-izq{
+        @apply gap-47
+    }
+  }
+}

@@ -70,7 +70,7 @@ export function CustomFileInput({ id, label, onFileSelected, error }) {
                                 />
                             )
                                 : (
-                                    <img className="w-5" src="/public/assets/images/icon-upload.svg" alt="Upload-image" />
+                                    <img className="w-5" src="/assets/images/icon-upload.svg" alt="Upload-image" />
                                 )}
                         </span>
                     </label>

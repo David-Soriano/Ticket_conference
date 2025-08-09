@@ -1,0 +1,41 @@
+@media (min-width: 310px) and (max-width: 369px) {
+  .ticket-col-izq {
+    @apply gap-8;
+  }
+}
+
+@media (min-width: 370px) and (max-width: 399px) {
+  .ticket-col-izq {
+    @apply gap-12;
+  }
+}
+
+@media (min-width: 500px) and (max-width: 600px) {
+  .section-ticket {
+    @apply w-3/4;
+  }
+}
+
+@media (min-width: 400px) and (max-width: 639px) {
+  .ticket-col-izq {
+    @apply gap-17.5;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .ticket-col-izq {
+    @apply gap-20;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1439px) {
+  .ticket-col-izq {
+    @apply gap-30;
+  }
+}
+
+@media (min-width: 1440px) and (max-width: 1800px) {
+  .ticket-col-izq {
+    @apply gap-28;
+  }
+}
