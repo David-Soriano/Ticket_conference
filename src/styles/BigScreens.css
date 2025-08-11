@@ -53,5 +53,8 @@
     .ticket-col-izq{
         @apply gap-47
     }
+    .decorMiddle{
+      @apply size-104 right-[14%]
+    }
   }
 }
