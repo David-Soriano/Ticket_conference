@@ -5,14 +5,16 @@ import { CustomFileInput } from '../Input/InputFile/InputFile';
 import { DecorMiddle } from '../DecorMiddle/DecorMiddle';
 
 export function Form() {
-    const [error, setErrors] = useState({})
     const navigate = useNavigate();
+
+    const [error, setErrors] = useState({})
     const [formData, setFormData] = useState({
         nombre: '',
         correo: '',
         GitHubUser: '',
         file_upload: ''
     });
+    
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     const handleChange = (e) => {

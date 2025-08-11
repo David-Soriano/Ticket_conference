@@ -1,11 +1,68 @@
-import { useRef, useState } from "react";
+import { useRef, useReducer} from "react";
+
+const initialState = {
+    file: false,
+    urlImg: null,
+    large: false,
+    formatCorrect: true,
+    nota: 'Upload your photo (JPG or PNG, max size: 500KB).'
+};
+
+const actionTypes = {
+    ISFILE: 'ISFILE',
+    ISLARGE: 'ISLARGE',
+    ERRORFORMAT: 'ERRORFORMAT',
+    NOTA: 'NOTA',
+    REMOVEFILEINPUT: 'REMOVEFILEINPUT',
+    SAVEIMG: 'SAVEIMG'
+};
+
+const reducerObject = (state, payload) => ({
+    [actionTypes.ISFILE]: {
+        ...state,
+        file: payload
+    },
+    [actionTypes.ISLARGE]: {
+        ...state,
+        large: payload
+    },
+    [actionTypes.ERRORFORMAT]: {
+        ...state,
+        formatCorrect: false
+    },
+    [actionTypes.NOTA]: {
+        ...state,
+        nota: payload
+    },
+    [actionTypes.REMOVEFILEINPUT]: {
+        ...state,
+        urlImg: null,
+        file: false,
+    },
+    [actionTypes.SAVEIMG]: {
+        ...state,
+        large: false,
+        formatCorrect: true,
+        nota: "Upload your photo (JPG or PNG, max size: 500KB).",
+        urlImg: payload,
+        file: true
+    }
+});
+
+const reducer = (state, action) => {
+    return reducerObject(state, action.payload)[action.type] || state;
+};
 
 export function CustomFileInput({ id, label, onFileSelected, error }) {
-    const [isFile, setIsFile] = useState(false);
-    const [urlImg, setUrlImg] = useState(null);
-    const [isLarge, setIsLarge] = useState(false);
-    const [isFormatCorrect, setIsFormatCorrect] = useState(true);
-    const [nota, setNota] = useState('Upload your photo (JPG or PNG, max size: 500KB).');
+    const [state, dispatch] = useReducer(reducer, initialState);
+
+    const isFile = (value) => dispatch({ type: actionTypes.ISFILE, payload: value });
+    const cleanFiles = () => dispatch({ type: actionTypes.REMOVEFILEINPUT });
+    const isLarge = (bool) => dispatch({ type: actionTypes.ISLARGE, payload: bool });
+    const saveImg = (url) => dispatch({ type: actionTypes.SAVEIMG, payload: url })
+    const errorFormat = () => dispatch({ type: actionTypes.ERRORFORMAT });
+    const addNota = (nota) => dispatch({ type: actionTypes.NOTA, payload: nota });
+
     const fileInputRef = useRef(null);
 
     const handleFileChange = (e) => {
@@ -13,24 +70,21 @@ export function CustomFileInput({ id, label, onFileSelected, error }) {
         const maxSizeKb = 500 * 1024;
         error = {};
         if (!file.type.startsWith("image/")) {
-            setIsFormatCorrect(false);
-            setNota("Incorrect file format. Only JPG or PNG allowed.");
+            errorFormat();
+            addNota("Incorrect file format. Only JPG or PNG allowed.");
             e.target.value = null;
             return;
         }
         if (file.size > maxSizeKb) {
-            setIsLarge(true);
-            setNota("File too large. Please upload a photo under 500KB.");
+            isLarge(true);
+            addNota("File too large. Please upload a photo under 500KB.");
             e.target.value = null;
             return;
         }
 
         const imageUrl = URL.createObjectURL(file);
-        setUrlImg(imageUrl)
-        setIsFile(file ? true : false);
-        setIsLarge(false);
-        setIsFormatCorrect(true);
-        setNota("Upload your photo (JPG or PNG, max size: 500KB).");
+
+        saveImg(imageUrl);
         onFileSelected(imageUrl);
 
     };
@@ -39,8 +93,7 @@ export function CustomFileInput({ id, label, onFileSelected, error }) {
     };
     const removeFileInput = () => {
         fileInputRef.current.value = null;
-        setUrlImg(null);
-        setIsFile(false);
+        cleanFiles();
         onFileSelected('');
     }
 
@@ -62,9 +115,9 @@ export function CustomFileInput({ id, label, onFileSelected, error }) {
                         htmlFor={id}
                         className="flex flex-col items-center justify-center size-10 overflow-hidden border border-Neutral-0/20 rounded-lg cursor-pointer bg-Neutral-0/20 hover:bg-gray-100 transition">
                         <span className="">
-                            {urlImg ? (
+                            {state.urlImg ? (
                                 <img
-                                    src={urlImg}
+                                    src={state.urlImg}
                                     alt="Vista previa"
                                     className="w-full"
                                 />
@@ -75,7 +128,7 @@ export function CustomFileInput({ id, label, onFileSelected, error }) {
                         </span>
                     </label>
 
-                    {isFile ? (
+                    {state.file ? (
                         <div className="flex gap-2 z-20">
                             <button className="bg-Neutral-0/20 py-0.5 px-1 rounded-sm text-[10px]" onClick={removeFileInput}>Remove Image</button>
                             <button className="bg-Neutral-0/20 py-0.5 px-1 rounded-sm text-[10px]" onClick={handleOpenFileDialog}> Change Image</button>
@@ -86,15 +139,15 @@ export function CustomFileInput({ id, label, onFileSelected, error }) {
                 </div>
             </div>
             <div className="flex gap-2 ">
-                <div className={`size-4 ${(isLarge || error) ? 'bg-Orange-500' : 'bg-Neutral-0'} mask mask-[url('/assets/images/icon-info.svg')] bg-no-repeat bg-center bg-cover`} />
-                <p className={`text-[10px] font-light ${(!isFormatCorrect || isLarge || error) ? 'text-Orange-500' : ''}`}>
-                    {isLarge
+                <div className={`size-4 ${(state.large || error) ? 'bg-Orange-500' : 'bg-Neutral-0'} mask mask-[url('/assets/images/icon-info.svg')] bg-no-repeat bg-center bg-cover`} />
+                <p className={`text-[10px] font-light ${(!state.formatCorrect || state.large || error) ? 'text-Orange-500' : ''}`}>
+                    {state.large
                         ? "File too large. Please upload a photo under 500KB."
-                        : !isFormatCorrect
+                        : !state.formatCorrect
                             ? "Incorrect file format. Only JPG or PNG allowed."
-                            : error || nota}
+                            : error || state.nota}
                 </p>
             </div>
         </div>
     );
-}
+};
