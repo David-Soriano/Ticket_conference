@@ -34,12 +34,16 @@ Users should be able to:
 - See hover and focus states for all interactive elements on the page
 
 ### Screenshot
-- Big screens (1440px)  
-![](public/assets/Screenshots/Init.png)
-![](public/assets/Screenshots/completed.png)
-![](public/assets/Screenshots/ticket.png)
+- Big screens (1440px)
+  
+  ![](public/assets/Screenshots/Init.png)
+  ![](public/assets/Screenshots/completed.png)
+  ![](public/assets/Screenshots/ticket.png)
+
 - Mobile screens (375px)
-![](public/assets/Screenshots/mobile.png)
+  
+  ![](public/assets/Screenshots/mobile.png)
+  
 ### Links
 
 - Solution URL: [GitGub](https://github.com/David-Soriano/Ticket_conference)
